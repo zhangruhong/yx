@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
     <meta charset="utf-8">
-    <title>银仙算命</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <title>银仙算你考试过不过</title>
     <link rel="icon" type="image/GIF" href="res/favicon.ico"/>
     <meta name="viewport" content="width=321, user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -19,7 +19,7 @@
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
     </style>
-
+    <script type="text/javascript" src="http://cdn.bootcss.com/html2canvas/0.5.0-alpha2/html2canvas.js"></script> 
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -31,21 +31,30 @@
     </script>
 </head>
 <body style="padding:0; margin: 0; background: #000000;">
-<canvas id="gameCanvas" width="800" height="450"></canvas>
+<img id="s2" src="/res/shaifu.JPG" width="1" height="1" alt="" />
+<canvas class="myCanvas" id="gameCanvas" width="800" height="450"></canvas>
 
 <script src="game.min.js"></script>
 <script src="WeixinApi.js"></script>
-<img width="500" height="500" style="position:absolute;top:-10000px;" src="http://mysingapore.duapp.com/res/biubiu.png">
-
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script>
+// 微信分享的数据
+var img=document.getElementById("s2").src;
 window.wxData = {
-    "appId": "", // 服务号可以填写appId
-    "imgUrl":'http://mysingapore.duapp.com/res/biubiu.png',
-    "link":'http://mysingapore.duapp.com/index.html',
-    "desc":"银仙算命，你就知道",
-    "title":"银仙算命"
+    "appId": "wx18a2b20290d55113", // 服务号可以填写appId
+    "imgUrl":img,
+    "link":'',
+    "title":"银仙V5，小符符曼妙，保我考试必过",
+    "desc":"银仙V5，小符符曼妙，保我考试必过"
 };
-function share(m, step, percent){
+function share(filedata){
+       document.title = window.wxData.desc = "银仙V5，小符符曼妙，保我考试必过";
+       var s=document.getElementById("s2");
+       s.src="http://115.28.202.165:3000/yx/"+filedata+".jpg";
+       console.log(s.src);
+       var img=document.getElementById("s2").src;
+       window.wxData.imgUrl = img;
 };
 WeixinApi.ready(function(Api) {
     var wxCallbacks = {
@@ -65,6 +74,5 @@ WeixinApi.ready(function(Api) {
     Api.shareToWeibo(wxData, wxCallbacks);
 });
 </script>
-
 </body>
 </html>
